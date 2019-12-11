@@ -1,0 +1,57 @@
+#:kivy 1.0.9
+  
+<Row@BoxLayout>:
+    canvas.before:
+        Color:
+            rgba: 0.5, 0.5, 0.5, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    value: ''
+    Label:
+        text: root.value
+
+<OpenCongress>:
+    canvas:
+        Color:
+            rgba: 0.3, 0.3, 0.3, 1
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    rv: rv
+    orientation: 'vertical'
+
+    BoxLayout:
+        orientation: 'horizontal'
+        height: dp(30)
+        size_hint_y: None
+        TextInput:
+            id: search_senate
+            height: dp(30)
+            hint_text: 'Search Senate'
+            multiline: False
+            padding: dp(5), dp(5), 0, 0
+
+    TabbedPanel:
+        do_default_tab: False
+
+        TabbedPanelItem:
+            text:"Senate"
+
+            RecycleView:
+                id: rv
+                scroll_type: ['bars', 'content']
+                scroll_wheel_distance: dp(114)
+                bar_width: dp(10)
+                viewclass: 'Row'
+
+                RecycleBoxLayout:
+                    default_size: None, dp(56)
+                    default_size_hint: 1, None
+                    size_hint_y: None
+                    height: self.minimum_height
+                    orientation: 'vertical'
+                    spacing: dp(2)
+        TabbedPanelItem:
+            text:"House"
+
