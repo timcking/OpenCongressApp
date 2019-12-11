@@ -6,12 +6,15 @@ from congress import Congress
 
 class OpenCongress(BoxLayout):
     API_KEY = config.APP_CONFIG['api_key']
+    dictSenate = {}
+    dictHouse = {}
 
     def __init__(self):
         super().__init__()
 
         self.congress = Congress(self.API_KEY)
         self.getChamberList('senate')
+        self.getChamberList('house')
 
     def getChamberList(self, chamber):
         all_members = self.congress.members.filter(chamber)
@@ -29,14 +32,13 @@ class OpenCongress(BoxLayout):
             party = member_list[i]['party']
             memberLine = str.format('%s %s (%s) %s' % (first_name, last_name, party, state))
 
-            self.rv.data.append({'value': memberLine})
+            if chamber == 'senate':
+                self.dictSenate[i] = member_list[i]['id']
+                self.rv.data.append({'value': memberLine})
+            else:
+                self.dictHouse[i] = member_list[i]['id']
+                self.rv2.data.append({'value': memberLine})
 
-            # if chamber == 'senate':
-            #     self.dictSenate[i] = member_list[i]['id']
-            #     self.ui.listSenate.addItem(memberLine)
-            # else:
-            #     self.dictHouse[i] = member_list[i]['id']
-            #     self.ui.listHouse.addItem(memberLine)
             i += 1
 
 class OpenCongressApp(App):
