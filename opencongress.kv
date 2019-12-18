@@ -1,9 +1,9 @@
 #:kivy 1.0.9
   
-<Row@BoxLayout>:
+<SelectableLabel>:
     canvas.before:
         Color:
-            rgba: 0.5, 0.5, 0.5, 1
+            rgba: (0, 0, 128, .3) if self.selected else (128, 128, 128, .3)
         Rectangle:
             size: self.size
             pos: self.pos
@@ -27,7 +27,7 @@
         height: dp(30)
         size_hint_y: None
         TextInput:
-            id: search_senate
+            id: search_chamber
             height: dp(30)
             hint_text: 'Search'
             multiline: False
@@ -44,9 +44,9 @@
                 scroll_type: ['bars', 'content']
                 scroll_wheel_distance: dp(114)
                 bar_width: dp(10)
-                viewclass: 'Row'
+                viewclass: 'SelectableLabel'
 
-                RecycleBoxLayout:
+                SelectableRecycleBoxLayout:
                     default_size: None, dp(56)
                     default_size_hint: 1, None
                     size_hint_y: None
@@ -62,9 +62,9 @@
                 scroll_type: ['bars', 'content']
                 scroll_wheel_distance: dp(114)
                 bar_width: dp(10)
-                viewclass: 'Row'
+                viewclass: 'SelectableLabel'
 
-                RecycleBoxLayout:
+                SelectableRecycleBoxLayout:
                     default_size: None, dp(56)
                     default_size_hint: 1, None
                     size_hint_y: None
