@@ -3,7 +3,7 @@
 <SelectableLabel>:
     canvas.before:
         Color:
-            rgba: (0, 0, 128, .3) if self.selected else (128, 128, 128, .3)
+            rgba: (128, 0, 128, .1) if self.selected else (128, 128, 128, .3)
         Rectangle:
             size: self.size
             pos: self.pos
@@ -14,7 +14,7 @@
 <OpenCongress>:
     canvas:
         Color:
-            rgba: 0.3, 0.3, 0.3, 1
+            rgba: 0.3, 0.3, 0.3, .9
         Rectangle:
             size: self.size
             pos: self.pos
@@ -42,7 +42,7 @@
             RecycleView:
                 id: rv
                 scroll_type: ['bars', 'content']
-                scroll_wheel_distance: dp(114)
+                scroll_wheel_distance: dp(128)
                 bar_width: dp(10)
                 viewclass: 'SelectableLabel'
 
@@ -60,7 +60,7 @@
             RecycleView:
                 id: rv2
                 scroll_type: ['bars', 'content']
-                scroll_wheel_distance: dp(114)
+                scroll_wheel_distance: dp(128)
                 bar_width: dp(10)
                 viewclass: 'SelectableLabel'
 
