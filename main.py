@@ -7,13 +7,24 @@ from kivy.properties import BooleanProperty
 from kivy.uix.recycleboxlayout import RecycleBoxLayout
 from kivy.uix.behaviors import FocusBehavior
 from kivy.uix.recycleview.layout import LayoutSelectionBehavior
+from kivy.uix.screenmanager import ScreenManager, Screen
 
 import config
 from congress import Congress
 
+class ListScreen(Screen):
+    pass
+
+class DetailScreen(Screen):
+    pass
+
+class ScreenManagement(ScreenManager):
+    pass
+
 class SelectableRecycleBoxLayout(FocusBehavior, LayoutSelectionBehavior,
                                  RecycleBoxLayout):
     ''' Adds selection and focus behaviour to the view. '''
+    pass
     
 class SelectableLabel(RecycleDataViewBehavior, Label):
     ''' Add selection support to the Label '''
@@ -39,6 +50,8 @@ class SelectableLabel(RecycleDataViewBehavior, Label):
         self.selected = is_selected
         if is_selected:
             print("selection changed to {0}".format(rv.data[index]))
+            # TCK ToDo
+            App.root_window = 'detail'
         else:
             print("selection removed for {0}".format(rv.data[index]))
 
@@ -48,17 +61,12 @@ class OpenCongress(BoxLayout):
     dictHouse = {}
 
     def __init__(self, **kwargs):
-        # super(OpenCongress, self).__init__(**kwargs)
-        super().__init__()
-
+        super().__init__(**kwargs)
         self.congress = Congress(self.API_KEY)
-        self.getChamberList('senate')
-        self.getChamberList('house')
 
     def getChamberList(self, chamber):
         all_members = self.congress.members.filter(chamber)
 
-        # print (all_members)
         num_results = int(all_members[0]['num_results'])
 
         member_list = all_members[0]['members']
@@ -73,6 +81,7 @@ class OpenCongress(BoxLayout):
 
             if chamber == 'senate':
                 self.dictSenate[i] = member_list[i]['id']
+
                 self.rv.data.append({'text': memberLine})
             else:
                 self.dictHouse[i] = member_list[i]['id']
@@ -81,8 +90,13 @@ class OpenCongress(BoxLayout):
             i += 1
 
 class OpenCongressApp(App):
-    def build(self):
-        return OpenCongress()
+    def on_start(self):
+        print(self.root.ids.sm.get_screen('list').ids.open_congress)
+        p = self.root.ids.sm.get_screen('list').ids.open_congress
+        p.getChamberList('senate')
+        p.getChamberList('house')
+        # self.root.ids.sm.current = 'detail'
 
 if __name__ == '__main__':
     OpenCongressApp().run()
+

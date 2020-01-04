@@ -1,4 +1,56 @@
-#:kivy 1.0.9
+#:kivy 1.10
+
+<ListScreen>:
+    OpenCongress:
+        id:open_congress
+        Button:
+            id: button_list
+            text: 'Go To Detail'
+            size_hint_y: None
+            on_press: root.manager.current = 'detail'
+
+<DetailScreen>:
+    GridLayout:
+        cols:1
+        # size: root.width - 200, root.height -200
+        size: root.width, root.height
+        # pos: 100, 100
+
+        BoxLayout:
+            orientation: 'horizontal'
+            anchor_x: 'center'
+            size_hint_y: None
+            rows: 1
+
+            Label:
+                text: "Name"
+
+            Image:
+                source: 'sherrod.jpg'
+
+        GridLayout:
+            cols:2
+
+            Label:
+                text: "State:"
+
+            TextInput:
+                id: name
+                multiline:False
+
+            Label:
+                text: "Chamber:"
+
+            TextInput:
+                id: email
+                multiline:False
+
+        Button:
+            id: button_detail
+            text: 'Back'
+            size_hint_y: None
+            on_press: root.manager.current = 'list'
+            
   
 <SelectableLabel>:
     canvas.before:
@@ -12,12 +64,6 @@
         text: root.value
 
 <OpenCongress>:
-    canvas:
-        Color:
-            rgba: 0.3, 0.3, 0.3, .9
-        Rectangle:
-            size: self.size
-            pos: self.pos
     rv: rv
     rv2: rv2
     orientation: 'vertical'
@@ -26,10 +72,13 @@
         orientation: 'horizontal'
         height: dp(30)
         size_hint_y: None
+        rows: 1
+
         TextInput:
             id: search_chamber
             height: dp(30)
             hint_text: 'Search'
+            size_hint_y: None
             multiline: False
             padding: dp(5), dp(5), 0, 0
 
@@ -71,3 +120,12 @@
                     height: self.minimum_height
                     orientation: 'vertical'
                     spacing: dp(2)
+
+BoxLayout:
+    ScreenManager:
+        id:sm
+        ListScreen:
+            name: 'list'
+        DetailScreen:
+            name: 'detail'
+
