@@ -7,14 +7,19 @@
             id: button_list
             text: 'Go To Detail'
             size_hint_y: None
+            height: dp(60)
             on_press: root.manager.current = 'detail'
 
 <DetailScreen>:
+    canvas.before:
+        Color:
+            rgba: (0, 0, 128, .3)
+        Rectangle:
+            pos: self.pos
+            size: self.size
     GridLayout:
         cols:1
-        # size: root.width - 200, root.height -200
         size: root.width, root.height
-        # pos: 100, 100
 
         BoxLayout:
             orientation: 'horizontal'
@@ -24,6 +29,7 @@
 
             Label:
                 text: "Name"
+                font_size: "30sp"
 
             Image:
                 source: 'sherrod.jpg'
@@ -32,23 +38,143 @@
             cols:2
 
             Label:
-                text: "State:"
+                text_size: self.size
+                bcolor: 1,0,1,1
+                padding_x: '10dp'
+                text: "State"
+                halign: 'right'
+                valign: 'middle'
+                size_hint_x: None
+                width: 100
 
             TextInput:
-                id: name
+                id: state
                 multiline:False
+                size_hint_x: None
+                width: 700
 
             Label:
-                text: "Chamber:"
+                text_size: self.size
+                padding_x: '10dp'
+                text: "Chamber"
+                halign: 'right'
+                valign: 'middle'
+                size_hint_x: None
+                width: 100
 
             TextInput:
-                id: email
+                id: chamber
+                size_hint_x: None
                 multiline:False
+                size_hint_x: None
+                width: 700
+
+            Label:
+                text_size: self.size
+                padding_x: '10dp'
+                text: "Party"
+                halign: 'right'
+                valign: 'middle'
+                size_hint_x: None
+                width: 100
+
+            TextInput:
+                id: party
+                size_hint_x: None
+                multiline:False
+                width: 700
+
+            Label:
+                text_size: self.size
+                padding_x: '10dp'
+                text: "Missed Votes %"
+                halign: 'right'
+                valign: 'middle'
+                size_hint_x: None
+                width: 100
+
+            TextInput:
+                id: votes
+                size_hint_x: None
+                multiline:False
+                width: 700
+
+
+            Label:
+                text_size: self.size
+                padding_x: '10dp'
+                text: "Birthday"
+                halign: 'right'
+                valign: 'middle'
+                size_hint_x: None
+                width: 100
+
+            TextInput:
+                id: birthday
+                multiline:False
+                size_hint_x: None
+                width: 700
+
+            Label:
+                text_size: self.size
+                padding_x: '10dp'
+                text: "Phone"
+                halign: 'right'
+                valign: 'middle'
+                size_hint_x: None
+                width: 100
+
+            TextInput:
+                id: Phone
+                size_hint_x: None
+                multiline:False
+                width: 700
+
+            Label:
+                text_size: self.size
+                padding_x: '10dp'
+                text: "Address"
+                halign: 'right'
+                valign: 'middle'
+                size_hint_x: None
+                width: 100
+
+            TextInput:
+                id: address
+                size_hint_x: None
+                multiline:False
+                width: 700
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            rows: 1
+            
+            Label:
+                text: "Contact"
+                size_hint_y: None
+
+            Label:
+                text: "Web"
+                size_hint_y: None
+
+            Label:
+                text: "VoteSmart"
+                size_hint_y: None
+
+            Label:
+                text: "GovTrack"
+                size_hint_y: None
+
+            Label:
+                text: "CRP"
+                size_hint_y: None
 
         Button:
             id: button_detail
             text: 'Back'
             size_hint_y: None
+            height: dp(60)
             on_press: root.manager.current = 'list'
             
   
