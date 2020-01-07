@@ -51,7 +51,9 @@ class SelectableLabel(RecycleDataViewBehavior, Label):
         if is_selected:
             print("selection changed to {0}".format(rv.data[index]))
             # TCK ToDo
-            App.root_window = 'detail'
+            App.giIndex = index
+            # print(App.giIndex)
+            # App.root_window = 'detail'
         else:
             print("selection removed for {0}".format(rv.data[index]))
 
@@ -90,11 +92,16 @@ class OpenCongress(BoxLayout):
             i += 1
 
 class OpenCongressApp(App):
+    # Is this global?
+    App.giIndex = 0
+
     def on_start(self):
-        print(self.root.ids.sm.get_screen('list').ids.open_congress)
         p = self.root.ids.sm.get_screen('list').ids.open_congress
+        # TCK remove comments
         p.getChamberList('senate')
         p.getChamberList('house')
+
+        # TCK, comment this out
         # self.root.ids.sm.current = 'detail'
 
 if __name__ == '__main__':

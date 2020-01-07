@@ -25,33 +25,43 @@
             orientation: 'horizontal'
             anchor_x: 'center'
             size_hint_y: None
+            height: dp(150)
+            padding: [0, 10, 0, 0]
             rows: 1
 
             Label:
-                text: "Name"
-                font_size: "30sp"
+                text: "John Q. Public"
+                font_size: "28sp"
+                halign: 'right'
+                padding_x: dp(10)
 
-            Image:
-                source: 'sherrod.jpg'
+
+            AsyncImage:
+                source: 'http://theunitedstates.io/images/congress/450x550/B000944.jpg'
+                # height: '120dp'
+                allow_stretch: True
 
         GridLayout:
             cols:2
+            padding: [10, 10, 10, 10]
 
             Label:
                 text_size: self.size
-                bcolor: 1,0,1,1
                 padding_x: '10dp'
                 text: "State"
                 halign: 'right'
                 valign: 'middle'
+                size_hint_y: None
+                height: dp(30)
                 size_hint_x: None
-                width: 100
+                width: dp(150)
 
             TextInput:
                 id: state
                 multiline:False
-                size_hint_x: None
-                width: 700
+                size_hint_y: None
+                height: dp(30)
+                background_color: [128, 128, 128, .7]
 
             Label:
                 text_size: self.size
@@ -59,15 +69,17 @@
                 text: "Chamber"
                 halign: 'right'
                 valign: 'middle'
+                size_hint_y: None
+                height: dp(30)
                 size_hint_x: None
-                width: 100
+                width: '150dp'
 
             TextInput:
                 id: chamber
-                size_hint_x: None
                 multiline:False
-                size_hint_x: None
-                width: 700
+                size_hint_y: None
+                height: dp(30)
+                background_color: [128, 128, 128, .7]
 
             Label:
                 text_size: self.size
@@ -75,14 +87,17 @@
                 text: "Party"
                 halign: 'right'
                 valign: 'middle'
+                size_hint_y: None
+                height: dp(30)
                 size_hint_x: None
-                width: 100
+                width: dp(150)
 
             TextInput:
                 id: party
-                size_hint_x: None
                 multiline:False
-                width: 700
+                size_hint_y: None
+                height: dp(30)
+                background_color: [128, 128, 128, .7]
 
             Label:
                 text_size: self.size
@@ -90,15 +105,17 @@
                 text: "Missed Votes %"
                 halign: 'right'
                 valign: 'middle'
+                size_hint_y: None
+                height: dp(30)
                 size_hint_x: None
-                width: 100
+                width: dp(150)
 
             TextInput:
                 id: votes
-                size_hint_x: None
                 multiline:False
-                width: 700
-
+                size_hint_y: None
+                height: dp(30)
+                background_color: [128, 128, 128, .7]
 
             Label:
                 text_size: self.size
@@ -106,14 +123,17 @@
                 text: "Birthday"
                 halign: 'right'
                 valign: 'middle'
+                size_hint_y: None
+                height: dp(30)
                 size_hint_x: None
-                width: 100
+                width: dp(150)
 
             TextInput:
                 id: birthday
                 multiline:False
-                size_hint_x: None
-                width: 700
+                size_hint_y: None
+                height: dp(30)
+                background_color: [128, 128, 128, .7]
 
             Label:
                 text_size: self.size
@@ -121,14 +141,17 @@
                 text: "Phone"
                 halign: 'right'
                 valign: 'middle'
+                size_hint_y: None
+                height: dp(30)
                 size_hint_x: None
-                width: 100
+                width: dp(150)
 
             TextInput:
                 id: Phone
-                size_hint_x: None
                 multiline:False
-                width: 700
+                size_hint_y: None
+                height: dp(30)
+                background_color: [128, 128, 128, .7]
 
             Label:
                 text_size: self.size
@@ -136,18 +159,21 @@
                 text: "Address"
                 halign: 'right'
                 valign: 'middle'
+                size_hint_y: None
+                height: dp(30)
                 size_hint_x: None
-                width: 100
+                width: dp(150)
 
             TextInput:
                 id: address
-                size_hint_x: None
                 multiline:False
-                width: 700
+                size_hint_y: None
+                height: dp(30)
+                background_color: [128, 128, 128, .7]
 
         BoxLayout:
             orientation: 'horizontal'
-            size_hint_y: None
+            # size_hint_y: None
             rows: 1
             
             Label:
