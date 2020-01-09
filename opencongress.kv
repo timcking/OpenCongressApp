@@ -3,12 +3,6 @@
 <ListScreen>:
     OpenCongress:
         id:open_congress
-        Button:
-            id: button_list
-            text: 'Go To Detail'
-            size_hint_y: None
-            height: dp(60)
-            on_press: root.manager.current = 'detail'
 
 <DetailScreen>:
     canvas.before:
@@ -30,31 +24,32 @@
             rows: 1
 
             Label:
-                text: "John Q. Public"
+                id: name
+                text: ""
+                text_size: self.size
                 font_size: "28sp"
                 halign: 'right'
+                valign: 'middle'
                 padding_x: dp(10)
 
-
             AsyncImage:
-                source: 'http://theunitedstates.io/images/congress/450x550/B000944.jpg'
-                # height: '120dp'
+                id: head_shot
                 allow_stretch: True
 
         GridLayout:
             cols:2
             padding: [10, 10, 10, 10]
+            spacing: dp(5)
 
             Label:
                 text_size: self.size
-                padding_x: '10dp'
                 text: "State"
                 halign: 'right'
                 valign: 'middle'
                 size_hint_y: None
                 height: dp(30)
                 size_hint_x: None
-                width: dp(150)
+                width: dp(100)
 
             TextInput:
                 id: state
@@ -65,14 +60,13 @@
 
             Label:
                 text_size: self.size
-                padding_x: '10dp'
                 text: "Chamber"
                 halign: 'right'
                 valign: 'middle'
                 size_hint_y: None
                 height: dp(30)
                 size_hint_x: None
-                width: '150dp'
+                width: dp(100)
 
             TextInput:
                 id: chamber
@@ -83,14 +77,13 @@
 
             Label:
                 text_size: self.size
-                padding_x: '10dp'
                 text: "Party"
                 halign: 'right'
                 valign: 'middle'
                 size_hint_y: None
                 height: dp(30)
                 size_hint_x: None
-                width: dp(150)
+                width: dp(100)
 
             TextInput:
                 id: party
@@ -101,14 +94,13 @@
 
             Label:
                 text_size: self.size
-                padding_x: '10dp'
-                text: "Missed Votes %"
+                text: "Missed Votes"
                 halign: 'right'
                 valign: 'middle'
                 size_hint_y: None
                 height: dp(30)
                 size_hint_x: None
-                width: dp(150)
+                width: dp(100)
 
             TextInput:
                 id: votes
@@ -119,14 +111,13 @@
 
             Label:
                 text_size: self.size
-                padding_x: '10dp'
                 text: "Birthday"
                 halign: 'right'
                 valign: 'middle'
                 size_hint_y: None
                 height: dp(30)
                 size_hint_x: None
-                width: dp(150)
+                width: dp(100)
 
             TextInput:
                 id: birthday
@@ -137,17 +128,16 @@
 
             Label:
                 text_size: self.size
-                padding_x: '10dp'
                 text: "Phone"
                 halign: 'right'
                 valign: 'middle'
                 size_hint_y: None
                 height: dp(30)
                 size_hint_x: None
-                width: dp(150)
+                width: dp(100)
 
             TextInput:
-                id: Phone
+                id: phone
                 multiline:False
                 size_hint_y: None
                 height: dp(30)
@@ -155,14 +145,13 @@
 
             Label:
                 text_size: self.size
-                padding_x: '10dp'
                 text: "Address"
                 halign: 'right'
                 valign: 'middle'
                 size_hint_y: None
                 height: dp(30)
                 size_hint_x: None
-                width: dp(150)
+                width: dp(100)
 
             TextInput:
                 id: address
@@ -173,28 +162,20 @@
 
         BoxLayout:
             orientation: 'horizontal'
-            # size_hint_y: None
+            spacing: dp(20)
             rows: 1
             
             Label:
-                text: "Contact"
-                size_hint_y: None
-
-            Label:
                 text: "Web"
-                size_hint_y: None
 
             Label:
                 text: "VoteSmart"
-                size_hint_y: None
 
             Label:
                 text: "GovTrack"
-                size_hint_y: None
 
             Label:
                 text: "CRP"
-                size_hint_y: None
 
         Button:
             id: button_detail
@@ -203,7 +184,6 @@
             height: dp(60)
             on_press: root.manager.current = 'list'
             
-  
 <SelectableLabel>:
     canvas.before:
         Color:
@@ -216,8 +196,9 @@
         text: root.value
 
 <OpenCongress>:
-    rv: rv
-    rv2: rv2
+    rvSenate: rvSenate
+    rvHouse: rvHouse
+    tabbed_panel: tabbed_panel
     orientation: 'vertical'
 
     BoxLayout:
@@ -236,12 +217,14 @@
 
     TabbedPanel:
         do_default_tab: False
+        id: tabbed_panel
 
         TabbedPanelItem:
             text:"Senate"
+            id: senate_panel
 
             RecycleView:
-                id: rv
+                id: rvSenate
                 scroll_type: ['bars', 'content']
                 scroll_wheel_distance: dp(128)
                 bar_width: dp(10)
@@ -257,9 +240,10 @@
 
         TabbedPanelItem:
             text:"House"
+            id: house_panel
 
             RecycleView:
-                id: rv2
+                id: rvHouse
                 scroll_type: ['bars', 'content']
                 scroll_wheel_distance: dp(128)
                 bar_width: dp(10)
