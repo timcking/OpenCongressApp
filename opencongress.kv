@@ -5,6 +5,12 @@
         id:open_congress
 
 <DetailScreen>:
+    txtName: txtName
+    lblWeb: lblWeb
+    lblVoteSmart: lblVoteSmart
+    lblGovTrack: lblGovTrack
+    lblCrp: lblCrp
+
     canvas.before:
         Color:
             rgba: (0, 0, 128, .3)
@@ -24,7 +30,7 @@
             rows: 1
 
             Label:
-                id: name
+                id: txtName
                 text: ""
                 text_size: self.size
                 font_size: "28sp"
@@ -166,16 +172,28 @@
             rows: 1
             
             Label:
+                id: lblWeb
                 text: "Web"
+                markup: True
+                underline: True
 
             Label:
+                id: lblVoteSmart
                 text: "VoteSmart"
+                markup: True
+                underline: True
 
             Label:
+                id: lblGovTrack
                 text: "GovTrack"
+                markup: True
+                underline: True
 
             Label:
+                id: lblCrp
                 text: "CRP"
+                markup: True
+                underline: True
 
         Button:
             id: button_detail

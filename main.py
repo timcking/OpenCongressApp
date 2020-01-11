@@ -1,8 +1,8 @@
 '''
 ToDo:
-* Implement links
+X Implement links
 * Implement search
-* App Icon
+X App Icon
 '''
 
 from kivy.app import App
@@ -17,7 +17,8 @@ from kivy.uix.recycleview.layout import LayoutSelectionBehavior
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import ObjectProperty
 from kivy.properties import StringProperty
-
+from kivy.config import Config
+import webbrowser
 import config
 from congress import Congress
 
@@ -29,29 +30,29 @@ class DetailScreen(Screen):
     PHOTO_URL = config.APP_CONFIG['photo_url']
 
     def on_pre_enter(self):
-        # member_id = App.member_id
-        # print("In on_pre_enter: " + member_id)
-        # self.ids.state.text = member_id 
         self.getPersonDetail()
 
     def getPersonDetail(self):
         self.congress = Congress(self.API_KEY)
         senator = self.congress.members.get(App.member_id)
         
-        # https://theunitedstates.io/images/congress/[size]/[bioguide].jpg
-        # [size] can be one of:
-        # original - As originally downloaded. Typically, 675x825, but it can vary.
-        # 450x550
-        # 225x275
+        '''
+        https://theunitedstates.io/images/congress/[size]/[bioguide].jpg
+        [size] can be one of:
+        original - As originally downloaded. Typically, 675x825, but it can vary.
+        450x550
+        225x275
+        '''
 
         try:
-            url = self.PHOTO_URL + App.member_id + '.jpg'
-            self.ids.head_shot.source = url
+            photo_url = self.PHOTO_URL + App.member_id + '.jpg'
+            self.ids.head_shot.source = photo_url
         except Exception as e:
             pass
 
         try:
-            self.ids.name.text = str(senator['first_name']) + ' ' + str(senator['last_name'])
+            # TCK ToDo, Name set as object property, need to set others
+            self.txtName.text = str(senator['first_name']) + ' ' + str(senator['last_name'])
             self.ids.state.text = str(senator['roles'][0]['state'])
             self.ids.party.text = str(senator['roles'][0]['party'])
             self.ids.chamber.text = str(senator['roles'][0]['chamber'])
@@ -60,36 +61,25 @@ class DetailScreen(Screen):
             self.ids.address.text = str(senator['roles'][0]['office'])
             self.ids.votes.text =  str(senator['roles'][0]['missed_votes_pct']) + '%'
 
-        #     if senator['url']:
-        #         self.person_detail.lblWeb.setText('<a href=' + senator['url'] + '>Web</a>')
-        #         self.person_detail.lblWeb.setOpenExternalLinks(True)
-        #     else:
-        #         self.person_detail.lblWeb.setText('Web')
+            if senator['url']:
+                self.lblWeb.text = '[ref=web]Web[/ref]'
+                self.lblWeb.bind(on_ref_press=lambda self, x:webbrowser.open(str(senator['url'])))
             
-        #     if senator['govtrack_id']:
-        #         url_name = str(senator['first_name']+ '_' + str(senator['last_name']))
-        #         url = 'https://www.govtrack.us/congress/members/' + url_name + '/'
-        #         self.person_detail.lblGovTrack.setText('<a href=' + url + str(senator['govtrack_id']) + '>GovTrack</a>')
-        #         self.person_detail.lblGovTrack.setOpenExternalLinks(True)
-        #     else:
-        #         self.person_detail.lblGovTrack.setText('GovTrack')
+            if senator['govtrack_id']:
+                self.lblGovTrack.text = '[ref=govtrack]GovTrack[/ref]'
+                url_name = str(senator['first_name']+ '_' + str(senator['last_name']))
+                gt_url = 'https://www.govtrack.us/congress/members/' + url_name + '/'
+                self.lblGovTrack.bind(on_ref_press=lambda self, x:webbrowser.open(gt_url + str(senator['govtrack_id'])))
+
+            if senator['votesmart_id']:
+                self.lblVoteSmart.text = '[ref=votesmart]VoteSmart[/ref]'
+                vs_url = 'https://votesmart.org/candidate/'
+                self.lblVoteSmart.bind(on_ref_press=lambda self, x:webbrowser.open(vs_url + str(senator['votesmart_id'])))
             
-        #     if senator['votesmart_id']:
-        #         url = 'https://votesmart.org/candidate/'
-        #         self.person_detail.lblVoteSmart.setText('<a href=' + url + str(senator['votesmart_id']) + '>VoteSmart</a>')
-        #         self.person_detail.lblVoteSmart.setOpenExternalLinks(True)
-        #     else:
-        #         self.person_detail.lblVoteSmart.setText('VoteSmart')
-            
-        #     if senator['crp_id']:
-        #         # url = 'https://www.opensecrets.org/members-of-congress/summary?cid='
-        #         # Need to escape the = sign with &#61;
-        #         url = 'https://www.opensecrets.org/members-of-congress/summary?cid&#61;'
-        #         crp_link = '<a href=' + url + str(senator['crp_id']) + '>CRP</a>'
-        #         self.person_detail.lblCrp.setText(crp_link)
-        #         self.person_detail.lblCrp.setOpenExternalLinks(True)
-        #     else:
-        #         self.person_detail.lblCrp.setText('CRP')
+            if senator['crp_id']:
+                self.lblCrp.text = '[ref=crp]CRP[/ref]'
+                crp_url = 'https://www.opensecrets.org/members-of-congress/summary?cid='
+                self.lblCrp.bind(on_ref_press=lambda self, x:webbrowser.open(crp_url + str(senator['crp_id'])))
             
         except KeyError:
             pass
@@ -142,8 +132,6 @@ class OpenCongress(BoxLayout):
         super().__init__(**kwargs)
         self.congress = Congress(self.API_KEY)
 
-        # TCK
-        tabbed_panel = ObjectProperty(None)
         rvSenate = ObjectProperty(None)
         rvHouse = ObjectProperty(None)
 
@@ -176,6 +164,7 @@ class OpenCongressApp(App):
     member_id = StringProperty('')
 
     def on_start(self):
+        self.icon = './data/dome.png'
         p = self.root.ids.sm.get_screen('list').ids.open_congress
 
         p.getChamberList('senate')
