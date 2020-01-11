@@ -1,7 +1,7 @@
 '''
 ToDo:
-X Implement links
 * Implement search
+X Implement links
 X App Icon
 '''
 
@@ -51,15 +51,14 @@ class DetailScreen(Screen):
             pass
 
         try:
-            # TCK ToDo, Name set as object property, need to set others
             self.txtName.text = str(senator['first_name']) + ' ' + str(senator['last_name'])
-            self.ids.state.text = str(senator['roles'][0]['state'])
-            self.ids.party.text = str(senator['roles'][0]['party'])
-            self.ids.chamber.text = str(senator['roles'][0]['chamber'])
-            self.ids.birthday.text = str(senator['date_of_birth'])
-            self.ids.phone.text = str(senator['roles'][0]['phone'])
-            self.ids.address.text = str(senator['roles'][0]['office'])
-            self.ids.votes.text =  str(senator['roles'][0]['missed_votes_pct']) + '%'
+            self.txtState.text = str(senator['roles'][0]['state'])
+            self.txtParty.text = str(senator['roles'][0]['party'])
+            self.txtChamber.text = str(senator['roles'][0]['chamber'])
+            self.txtBirthday.text = str(senator['date_of_birth'])
+            self.txtPhone.text = str(senator['roles'][0]['phone'])
+            self.txtAddress.text = str(senator['roles'][0]['office'])
+            self.txtVotes.text =  str(senator['roles'][0]['missed_votes_pct']) + '%'
 
             if senator['url']:
                 self.lblWeb.text = '[ref=web]Web[/ref]'
@@ -83,9 +82,6 @@ class DetailScreen(Screen):
             
         except KeyError:
             pass
-
-class ScreenManagement(ScreenManager):
-    pass
 
 class SelectableRecycleBoxLayout(FocusBehavior, LayoutSelectionBehavior,
                                  RecycleBoxLayout):

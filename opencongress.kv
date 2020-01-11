@@ -6,6 +6,14 @@
 
 <DetailScreen>:
     txtName: txtName
+    txtState: txtState
+    txtParty: txtParty
+    txtChamber: txtChamber
+    txtVotes: txtVotes
+    txtPhone: txtPhone
+    txtAddress: txtAddress
+    txtBirthday: txtBirthday
+
     lblWeb: lblWeb
     lblVoteSmart: lblVoteSmart
     lblGovTrack: lblGovTrack
@@ -53,16 +61,17 @@
                 halign: 'right'
                 valign: 'middle'
                 size_hint_y: None
-                height: dp(30)
+                height: dp(32)
                 size_hint_x: None
                 width: dp(100)
 
             TextInput:
-                id: state
+                id: txtState
                 multiline:False
                 size_hint_y: None
-                height: dp(30)
+                height: dp(32)
                 background_color: [128, 128, 128, .7]
+                padding: [10, (self.height-self.line_height)/2]
 
             Label:
                 text_size: self.size
@@ -70,16 +79,17 @@
                 halign: 'right'
                 valign: 'middle'
                 size_hint_y: None
-                height: dp(30)
+                height: dp(32)
                 size_hint_x: None
                 width: dp(100)
 
             TextInput:
-                id: chamber
+                id: txtChamber
                 multiline:False
                 size_hint_y: None
-                height: dp(30)
+                height: dp(32)
                 background_color: [128, 128, 128, .7]
+                padding: [10, (self.height-self.line_height)/2]
 
             Label:
                 text_size: self.size
@@ -87,16 +97,17 @@
                 halign: 'right'
                 valign: 'middle'
                 size_hint_y: None
-                height: dp(30)
+                height: dp(32)
                 size_hint_x: None
                 width: dp(100)
 
             TextInput:
-                id: party
+                id: txtParty
                 multiline:False
                 size_hint_y: None
-                height: dp(30)
+                height: dp(32)
                 background_color: [128, 128, 128, .7]
+                padding: [10, (self.height-self.line_height)/2]
 
             Label:
                 text_size: self.size
@@ -104,16 +115,17 @@
                 halign: 'right'
                 valign: 'middle'
                 size_hint_y: None
-                height: dp(30)
+                height: dp(32)
                 size_hint_x: None
                 width: dp(100)
 
             TextInput:
-                id: votes
+                id: txtVotes
                 multiline:False
                 size_hint_y: None
-                height: dp(30)
+                height: dp(32)
                 background_color: [128, 128, 128, .7]
+                padding: [10, (self.height-self.line_height)/2]
 
             Label:
                 text_size: self.size
@@ -121,16 +133,17 @@
                 halign: 'right'
                 valign: 'middle'
                 size_hint_y: None
-                height: dp(30)
+                height: dp(32)
                 size_hint_x: None
                 width: dp(100)
 
             TextInput:
-                id: birthday
+                id: txtBirthday
                 multiline:False
                 size_hint_y: None
-                height: dp(30)
+                height: dp(32)
                 background_color: [128, 128, 128, .7]
+                padding: [10, (self.height-self.line_height)/2]
 
             Label:
                 text_size: self.size
@@ -138,16 +151,17 @@
                 halign: 'right'
                 valign: 'middle'
                 size_hint_y: None
-                height: dp(30)
+                height: dp(32)
                 size_hint_x: None
                 width: dp(100)
 
             TextInput:
-                id: phone
+                id: txtPhone
                 multiline:False
                 size_hint_y: None
-                height: dp(30)
+                height: dp(32)
                 background_color: [128, 128, 128, .7]
+                padding: [10, (self.height-self.line_height)/2]
 
             Label:
                 text_size: self.size
@@ -155,20 +169,21 @@
                 halign: 'right'
                 valign: 'middle'
                 size_hint_y: None
-                height: dp(30)
+                height: dp(32)
                 size_hint_x: None
                 width: dp(100)
 
             TextInput:
-                id: address
+                id: txtAddress
                 multiline:False
                 size_hint_y: None
-                height: dp(30)
+                height: dp(32)
                 background_color: [128, 128, 128, .7]
+                padding: [10, (self.height-self.line_height)/2]
 
         BoxLayout:
             orientation: 'horizontal'
-            spacing: dp(20)
+            spacing: dp(30)
             rows: 1
             
             Label:
@@ -219,19 +234,20 @@
     tabbed_panel: tabbed_panel
     orientation: 'vertical'
 
-    BoxLayout:
-        orientation: 'horizontal'
-        height: dp(30)
-        size_hint_y: None
-        rows: 1
+    # TCK ToDo: Add search functionality
+    # BoxLayout:
+    #     orientation: 'horizontal'
+    #     height: dp(30)
+    #     size_hint_y: None
+    #     rows: 1
 
-        TextInput:
-            id: search_chamber
-            height: dp(30)
-            hint_text: 'Search'
-            size_hint_y: None
-            multiline: False
-            padding: dp(5), dp(5), 0, 0
+    #     TextInput:
+    #         id: search_chamber
+    #         height: dp(30)
+    #         hint_text: 'Search'
+    #         size_hint_y: None
+    #         multiline: False
+    #         padding: dp(5), dp(5), 0, 0
 
     TabbedPanel:
         do_default_tab: False
