@@ -232,9 +232,10 @@
     rvSenate: rvSenate
     rvHouse: rvHouse
     tabbed_panel: tabbed_panel
+    # search_text: search_text
     orientation: 'vertical'
 
-    # TCK ToDo: Add search functionality
+    # # TCK ToDo: Add search functionality
     # BoxLayout:
     #     orientation: 'horizontal'
     #     height: dp(30)
@@ -242,12 +243,30 @@
     #     rows: 1
 
     #     TextInput:
-    #         id: search_chamber
+    #         id: search_text
     #         height: dp(30)
     #         hint_text: 'Search'
     #         size_hint_y: None
     #         multiline: False
     #         padding: dp(5), dp(5), 0, 0
+
+    #     Button:
+    #         id: button_search
+    #         text: 'Search'
+    #         size_hint_x: None
+    #         width: dp(80)
+    #         size_hint_y: None
+    #         height: dp(30)
+    #         on_press: root.searchChamber(search_text.text)
+
+    #     Button:
+    #         id: button_clear
+    #         text: 'Clear'
+    #         size_hint_x: None
+    #         width: dp(80)
+    #         size_hint_y: None
+    #         height: dp(30)
+    #         on_press: root.getChamberList(tabbed_panel.current_tab.text.lower())
 
     TabbedPanel:
         do_default_tab: False

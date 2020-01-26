@@ -46,7 +46,7 @@ requirements = python3,kivy,python-congress,httplib2,requests,six,urllib3
 #garden_requirements =
 
 # (str) Presplash of the application
-#presplash.filename = %(source.dir)s/data/presplash.png
+presplash.filename = %(source.dir)s/data/dome.png
 
 # (str) Icon of the application
 icon.filename = %(source.dir)s/data/dome.png

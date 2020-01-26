@@ -109,13 +109,15 @@ class SelectableLabel(RecycleDataViewBehavior, Label):
 
     def apply_selection(self, rv, index, is_selected):
         ''' Respond to the selection of items in the view. '''
+
+        # TCK ToDo: index will always be zero after a search
         self.selected = is_selected
         if is_selected:
             App.giIndex = index
             if rv.parent.parent.current_tab.text == "Senate":
-                App.member_id = rv.parent.parent.parent.dictSenate[index]
+                App.member_id = OpenCongress.dictSenate[index]
             else:
-                App.member_id = rv.parent.parent.parent.dictHouse[index]
+                App.member_id = OpenCongress.dictHouse[index]
 
             rv.parent.parent.parent.parent.manager.current = 'detail'
             
@@ -132,10 +134,17 @@ class OpenCongress(BoxLayout):
         rvHouse = ObjectProperty(None)
 
     def getChamberList(self, chamber):
+        # Clear search box
+        # self.search_text.text = ""
+
+        # Clear lists for search
+        if chamber == 'senate':
+            self.rvSenate.data = []
+        else:
+            self.rvHouse.data = []
+
         all_members = self.congress.members.filter(chamber)
-
         num_results = int(all_members[0]['num_results'])
-
         member_list = all_members[0]['members']
 
         i = 0
@@ -155,6 +164,30 @@ class OpenCongress(BoxLayout):
 
             i += 1
 
+    def searchChamber(self, search_text):
+        chamber = self.tabbed_panel.current_tab.text
+        if chamber == 'Senate':
+            self.full_list = self.rvSenate.data
+            data_items = [list(i.values())[0] for i in self.full_list]  # unpack the list of dictionaries to get the data
+            s = sorted(data_items, key=lambda x: x.count(search_text), reverse=True)
+            s = s[0:1]
+            self.rvSenate.data = [{'text': item} for item in s]  # repack the dictionary
+
+            # Remove brackets and quotes
+            search_string = str(s).replace('[','').replace(']','')
+            search_string = eval(search_string)
+
+            _index = data_items.index(search_string)
+            App.member_id = self.dictSenate[_index]
+            print('member_id from search: {}'.format(App.member_id))
+
+        else:
+            self.full_list = self.rvHouse.data
+            data_items = [list(i.values())[0] for i in self.full_list]  # unpack the list of dictionaries to get the data
+            s = sorted(data_items, key=lambda x: x.count(search_text), reverse=True)
+            s = s[0:1]
+            self.rvHouse.data = [{'text': item} for item in s]  # repack the dictionary
+
 class OpenCongressApp(App):
     giIndex = 0
     member_id = StringProperty('')
@@ -168,4 +201,3 @@ class OpenCongressApp(App):
 
 if __name__ == '__main__':
     OpenCongressApp().run()
-
