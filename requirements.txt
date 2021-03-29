@@ -8,7 +8,7 @@ Kivy==1.11.1
 Kivy-Garden==0.1.4
 pkg-resources==0.0.0
 pygame==1.9.6
-Pygments==2.5.2
+Pygments==2.7.4
 python-congress==0.3.5
 requests==2.22.0
 six==1.13.0
